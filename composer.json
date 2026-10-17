@@ -1,0 +1,11 @@
+{
+    "name": "openpx/cli",
+    "description": "OpenPX command line (early release).",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://openpx.org",
+    "keywords": ["openpx", "product-information", "cli"],
+    "authors": [{ "name": "OpenPX", "email": "packages@openpx.com" }],
+    "require": { "php": ">=7.4", "openpx/sdk": "0.0.1" },
+    "bin": ["bin/openpx"]
+}

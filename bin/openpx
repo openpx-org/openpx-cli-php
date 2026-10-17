@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+// OpenPX command line, early release.
+
+foreach ([__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoload.php'] as $autoload) {
+    if (is_file($autoload)) {
+        require $autoload;
+        break;
+    }
+}
+
+use OpenPX\Sdk\Schema;
+
+const OPENPX_CLI_VERSION = '0.0.1';
+$help = "openpx: the OpenPX command line (early release)
+
+Usage:
+  openpx --version   Show the version
+  openpx schema      Print the address of the OpenPX schema
+  openpx --help      Show this help
+
+More: https://openpx.org";
+
+$cmd = $argv[1] ?? null;
+switch ($cmd) {
+    case '--version':
+    case '-V':
+        echo 'openpx ' . OPENPX_CLI_VERSION . ' (schema ' . Schema::VERSION . ")\n";
+        exit(0);
+    case 'schema':
+        echo Schema::URL . "\n";
+        exit(0);
+    case null:
+    case '--help':
+    case '-h':
+        echo $help . "\n";
+        exit(0);
+    default:
+        fwrite(STDERR, "openpx: unknown command '$cmd'\n\n$help\n");
+        exit(2);
+}
